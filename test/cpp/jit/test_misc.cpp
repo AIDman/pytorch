@@ -2155,7 +2155,7 @@ TEST(TLSFutureCallbacksTest, Basic) {
   // test running callbacks with propagation of TLS state.
   {
     // Enable the profiler in this thread
-    torch::autograd::profiler::enableProfiler(
+    torch::autograd::profiler::enableProfilerLegacy(
         torch::autograd::profiler::ProfilerConfig(
             torch::autograd::profiler::ProfilerState::CPU, false, false));
     auto s1 = c10::make_intrusive<Future>(IntType::get());
@@ -2169,7 +2169,7 @@ TEST(TLSFutureCallbacksTest, Basic) {
   // then() with TLS State
   {
     // Enable the profiler in this thread
-    torch::autograd::profiler::enableProfiler(
+    torch::autograd::profiler::enableProfilerLegacy(
         torch::autograd::profiler::ProfilerConfig(
             torch::autograd::profiler::ProfilerState::CPU, false, false));
     auto s1 = c10::make_intrusive<Future>(IntType::get());
@@ -2191,7 +2191,7 @@ TEST(ProfilerDisableInCallbackTest, Basic) {
   auto profilerEnabledCb = []() {
     ASSERT_TRUE(torch::autograd::profiler::profilerEnabled());
   };
-  torch::autograd::profiler::enableProfiler(
+  torch::autograd::profiler::enableProfilerLegacy(
       torch::autograd::profiler::ProfilerConfig(
           torch::autograd::profiler::ProfilerState::CPU, false, false));
   auto s1 = c10::make_intrusive<Future>(IntType::get());
@@ -2235,7 +2235,7 @@ TEST(ProfilerDisableInCallbackTest, Basic) {
 
   // Similar to above test, but verifies correctness in the case where
   // continuation runs on the main thread.
-  torch::autograd::profiler::enableProfiler(
+  torch::autograd::profiler::enableProfilerLegacy(
       torch::autograd::profiler::ProfilerConfig(
           torch::autograd::profiler::ProfilerState::CPU, false, false));
   s1 = c10::make_intrusive<Future>(IntType::get());
