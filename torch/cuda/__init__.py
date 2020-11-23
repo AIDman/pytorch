@@ -75,6 +75,8 @@ version from the URL: http://www.nvidia.com/Download/index.aspx
 Alternatively, go to: https://pytorch.org to install
 a PyTorch version that has been compiled with your version
 of the CUDA driver.""".format(str(torch._C._cuda_getDriverVersion())))
+    if not is_available():
+        raise AssertionError("Shantanu says CUDA isn't available")
 
 
 def _check_capability():
